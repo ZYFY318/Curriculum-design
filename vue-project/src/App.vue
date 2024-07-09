@@ -1,47 +1,79 @@
-<script setup lang="ts">
-import HelloWorld from './components/HelloWorld.vue'
-import TheWelcome from './components/TheWelcome.vue'
-</script>
-
 <template>
-  <header>
-    <img alt="Vue logo" class="logo" src="./assets/logo.svg" width="125" height="125" />
-
-    <div class="wrapper">
-      <HelloWorld msg="You did it!" />
-    </div>
-  </header>
-
-  <main>
-    <TheWelcome />
-  </main>
+  <div class="header">
+      <div class="header-left">
+          <img class="logo" src="./assets/img/logo.jpg" alt="" />
+          <div class="web-title">ACDC</div>
+      </div>
+      <div class="header-right">
+          <div class = "navigate">
+              <RouterLink to="/main" active-class="active">首页</RouterLink>
+              <RouterLink to="/contest" active-class="active">比赛</RouterLink>
+              <RouterLink to="/profile" active-class="active">个人</RouterLink>
+              <RouterLink to="/train" active-class="active">训练</RouterLink>
+          </div>
+      </div>
+  </div>
+  <div class = 'main-contest'>
+      <RouterView></RouterView>
+  </div>
 </template>
 
+<script setup lang="ts">
+import { onMounted } from 'vue';
+import { useRouter } from 'vue-router';
+import { RouterView, RouterLink } from 'vue-router';
+// const username: string | null = localStorage.getItem('vuems_name');
+
+
+onMounted(() => {
+});
+
+// 用户名下拉菜单选择事件
+const router = useRouter();
+
+</script>
 <style scoped>
-header {
-  line-height: 1.5;
+.header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  box-sizing: border-box;
+  width: 100%;
+  height: 70px;
+  color: var(--header-text-color);
+  background-color: var(--header-bg-color);
+  border-bottom: 1px solid #ddd;
+}
+
+.header-left {
+  display: flex;
+  align-items: center;
+  padding-left: 20px;
+  height: 100%;
 }
 
 .logo {
-  display: block;
-  margin: 0 auto 2rem;
+  width: 35px;
 }
 
-@media (min-width: 1024px) {
-  header {
-    display: flex;
-    place-items: center;
-    padding-right: calc(var(--section-gap) / 2);
-  }
-
-  .logo {
-    margin: 0 2rem 0 0;
-  }
-
-  header .wrapper {
-    display: flex;
-    place-items: flex-start;
-    flex-wrap: wrap;
-  }
+.header-right {
+  float: right;
+  padding-right: 50px;
 }
+
+.navigate {
+  display: flex;
+  gap: 20px;
+}
+
+.navigate > * {
+  text-decoration: none;
+  color: var(--header-text-color);
+  font-weight: bold;
+}
+
+.navigate .active {
+  color: var(--active-link-color);
+}
+
 </style>
